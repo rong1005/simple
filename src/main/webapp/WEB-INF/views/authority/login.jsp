@@ -7,7 +7,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title>简单模板 :: 登录页</title>
+	<title>模板示例 :: 登录页</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="author" content="Libra">
@@ -41,7 +41,7 @@
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
 							<div id="logo">
-								<a href="index.html"><img src="${ctx}/static/img/logo/logo.png" height="40" alt="logo name" /></a>
+								<a href="index.html"><img src="${ctx}/static/img/logo/logo-alt.png" height="40" alt="logo name" /></a>
 							</div>
 						</div>
 					</div>
@@ -50,11 +50,11 @@
 			</header>
 			<!--/HEADER -->
 			<!-- LOGIN -->
-			<section id="login_bg" class="visible">
+			<section id="login" class="visible">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
-							<div class="login-box">
+							<div class="login-box-plain">
 								<h2 class="bigintro">Sign In</h2>
 								<div class="divide-40">
 								<%
@@ -81,7 +81,7 @@
 									<i class="fa fa-lock"></i>
 									<input type="password" name="password" class="form-control" id="password" >
 								  </div>
-								  <div>
+								  <div class="form-actions">
 									<label class="checkbox"> <input type="checkbox" class="uniform" value=""> 十天内免登录</label>
 									<button type="submit" class="btn btn-danger"> 登 录 </button>
 								  </div>
@@ -105,11 +105,11 @@
 								</div>
 								<!-- /SOCIAL LOGIN -->
 								<div class="login-helpers">
-									<a href="#" onclick="swapScreen('forgot_bg');return false;">忘记密码?</a> 
+									<a href="#" onclick="swapScreen('forgot');return false;">忘记密码?</a> 
 									<br/>
 									&emsp;&emsp;(管理员: <b>admin/admin</b>, 普通用户: <b>user/user</b>)
 									<br/>
-									没有账号? <a href="#" onclick="swapScreen('register_bg');return false;">马上注册!</a>
+									没有账号? <a href="#" onclick="swapScreen('register');return false;">马上注册!</a>
 								</div>
 							</div>
 						</div>
@@ -118,11 +118,11 @@
 			</section>
 			<!--/LOGIN -->
 			<!-- REGISTER -->
-			<section id="register_bg" class="font-400">
+			<section id="register">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
-							<div class="login-box">
+							<div class="login-box-plain">
 								<h2 class="bigintro"> 欢 迎 加 入 </h2>
 								<div class="divide-40"></div>
 								<form role="form" id="registerForm" action="${ctx}/register" method="post">
@@ -175,7 +175,7 @@
 								</div>
 								<!-- /SOCIAL REGISTER -->
 								<div class="login-helpers">
-									<a href="#" onclick="swapScreen('login_bg');return false;"> 回到登录页 </a> <br>
+									<a href="#" onclick="swapScreen('login');return false;"> 回到登录页 </a> <br>
 								</div>
 							</div>
 						</div>
@@ -184,11 +184,11 @@
 			</section>
 			<!--/REGISTER -->
 			<!-- FORGOT PASSWORD -->
-			<section id="forgot_bg">
+			<section id="forgot">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
-							<div class="login-box">
+							<div class="login-box-plain">
 								<h2 class="bigintro">找回密码</h2>
 								<div class="divide-40"></div>
 								<form role="form">
@@ -197,12 +197,12 @@
 									<i class="fa fa-envelope"></i>
 									<input type="email" class="form-control" id="exampleInputEmail1" >
 								  </div>
-								  <div>
+								  <div class="form-actions">
 									<button type="submit" class="btn btn-info">Send Me Reset Instructions</button>
 								  </div>
 								</form>
 								<div class="login-helpers">
-									<a href="#" onclick="swapScreen('login_bg');return false;"> 回到登录页 </a> <br>
+									<a href="#" onclick="swapScreen('login');return false;"> 回到登录页 </a> <br>
 								</div>
 							</div>
 						</div>
@@ -224,8 +224,6 @@
 	
 	<!-- UNIFORM -->
 	<script type="text/javascript" src="${ctx}/static/js/uniform/jquery.uniform.min.js"></script>
-	<!-- BACKSTRETCH -->
-	<script type="text/javascript" src="${ctx}/static/js/backstretch/jquery.backstretch.min.js"></script>
 	
 	<!-- JQUERY-VALIDATE -->
 	<script type="text/javascript" src="${ctx}/static/js/jquery-validate/jquery.validate.min.js"></script>
@@ -235,48 +233,35 @@
 	<script type="text/javascript" src="${ctx}/static/js/jQuery-Cookie/jquery.cookie.min.js"></script>
 	
 	<script type="text/javascript">
-	jQuery(document).ready(
-			function() {
-				$(".uniform").uniform();
-				//设置图片轮换.
-				$("body").backstretch(
-						[
-						"${ctx}/static/img/login/1.jpg",
-						 "${ctx}/static/img/login/2.jpg",
-						 "${ctx}/static/img/login/3.jpg",
-						 "${ctx}/static/img/login/4.jpg",
-						 "${ctx}/static/img/login/5.jpg"
-						 ], 
-						{duration : 3000,fade : 750}
-						);
-				
-				$("body").backstretch("${ctx}/static/img/login/2.jpg");
+	$(".uniform").uniform();
+		jQuery(document).ready(function() {		
+			$(".uniform").uniform();
 			
-				//登录校验.
-				$("#loginForm").validate({
-					errorPlacement: function(error, element) { 
-					    $(element).attr("data-content",$(error).html());
-					    $(element).popover({
-					    	placement : 'left',
-					    	trigger : 'focus'
-					    });
-					},
-					rules: {
-						username: "required",
-						password: "required"
-					},
-					messages: {
-						username: "请输入您的登录账号",
-						password: "请输入您的登录密码"
-					}
-				});
+			//登录校验.
+			$("#loginForm").validate({
+				errorPlacement: function(error, element) { 
+				    $(element).attr("data-content",$(error).html());
+				    $(element).popover({
+				    	placement : 'left',
+				    	trigger : 'focus'
+				    });
+				},
+				rules: {
+					username: "required",
+					password: "required"
+				},
+				messages: {
+					username: "请输入您的登录账号",
+					password: "请输入您的登录密码"
+				}
 			});
-	
+		});
+
 		function swapScreen(id) {
 			jQuery('.visible').removeClass('visible animated fadeInUp');
 			jQuery('#'+id).addClass('visible animated fadeInUp');
 		}
-
+		
 		//清除侧边栏的历史样式Cookie.
 		$.cookie('mini_sidebar',null); 
 	</script>

@@ -22,7 +22,7 @@ public class LoginController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
-		return "authority/login-bg";
+		return "authority/login";
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-		return "authority/login-bg";
+		return "authority/login";
 	}
 
 }
